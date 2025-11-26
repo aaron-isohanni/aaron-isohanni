@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esimerkkisivu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            padding-bottom: 5rem;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .nopat {
+            width: 50px;
+            margin: 20px;
+        }
+        #omakuva {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeren nettisivu</h1>
+    <img id="omakuva" src="omakuva.jpg">
+    <p>TÃ¤mÃ¤ on esimerkkisivu  koodauksen johdantoon.</p>
+    <button id="nappi1">nappi 1</button>
+    <button id="nappi2">nappi 2</button>
+    <p>Olet painanut nappia</p>
+    <p id="painallukset">0</p>
+    <p>kertaa</p>
+
+    <input id="input1">
+    <button id="nappi3">nappi 3</button>
+    <p id="sana1"></p>
+
+    <p>Kuinka monta kÃ¤Ã¤piÃ¶tÃ¤ oli Lumikki sadussa?</p>
+    <input id="input_vastaus">
+    <button id="nappi4">lÃ¤hetÃ¤ vastaus</button>
+    <p id="tulos"></p>
+
+    <h2>Satunnaisluvut</h2>
+    <button id="nappi5">heitÃ¤ noppaa</button>
+    <p id="luku"></p>
+
+    <button id="nappi6">heitÃ¤ oikeaa noppaa</button><br/>
+    <img class="nopat" id="noppakuva" src="kaikkinopat\n1.pgn.png"/><br />
+
+    <button id="nappi7">heitÃ¤ kahta noppaa</button><br/>
+    <img class="nopat" id="tuplanoppa1" src="kaikkinopat\n1.pgn.png"/
+    <img class="nopat" id="tuplanoppa2" src="kaikkinopat\n1.pgn.png"/>
+
+
+</body>
+<script>
+    var laskuri = 0;
+    var sana = "";
+    var vastaus = "";
+    var nopat = ["n1.png", "n2.png", "n3.png", "n4.png", "n5.png", "n6.png"];
+
+    document.addEventListener("DOMContentLoaded", function() {    
+        function varinvaihto() {
+            document.getElementsByTagName("body")[0].style.color = "red";
+        }
+        
+        function painallus() {
+            laskuri = laskuri + 134;
+            document.getElementById("painallukset").innerHTML = laskuri;
+        }
+
+        // TÃ¤mÃ¤ on vain harjoitusfunktio
+        function inputf() {
+            sana = document.getElementById("input1").value;
+            sana = sana.toUpperCase();
+            document.getElementById("sana1").innerHTML = sana;
+        }
+
+        function tarkistaVastaus() {
+            vastaus = document.getElementById("input_vastaus").value;
+            
+            var tulos = "";
+            
+            if (vastaus.toUpperCase() == "SEITSEMÃ„N" || vastaus == "7") {
+                tulos = "Hienoa, vastasit oikein";
+            } else {
+                tulos = "Olet surkea ihminen, et saanut edes tÃ¤tÃ¤ oikein";
+            }
+
+            document.getElementById("tulos").innerHTML = tulos;
+        }
+
+        function satunnaisluku() {
+            var sl = Math.floor(6 * Math.random()) + 1;
+            document.getElementById("luku").innerHTML = sl;
+        }
+
+        function nopanHeitto() {
+            var sl = Math.floor(6 * Math.random());
+            document.getElementById("noppakuva").src = nopat[sl];
+        }
+
+        function tuplaNopanHeitto() {
+            var sl1 = Math.floor(6 * Math.random());
+            var sl2 = Math.floor(6 * Math.random());
+            document.getElementById("tuplanoppa1").src = nopat[sl1];
+            document.getElementById("tuplanoppa2").src = nopat[sl2];
+        }
+
+        lisaaToimintoNappiin(varinvaihto, "nappi1");
+        lisaaToimintoNappiin(painallus, "nappi2");
+        lisaaToimintoNappiin(inputf, "nappi3");
+        lisaaToimintoNappiin(tarkistaVastaus, "nappi4");
+        lisaaToimintoNappiin(satunnaisluku, "nappi5");
+        lisaaToimintoNappiin(nopanHeitto, "nappi6");
+        lisaaToimintoNappiin(tuplaNopanHeitto, "nappi7");
+
+        function lisaaToimintoNappiin(toiminto, nappi){
+            var n = document.getElementById(nappi);
+            n.addEventListener("click", toiminto);
+        }
+    
+    });
+
+</script>
+</html>
